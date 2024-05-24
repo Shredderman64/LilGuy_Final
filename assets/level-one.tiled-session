@@ -1,0 +1,45 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "LevelOneMap.tmx",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "": {
+            "scaleInEditor": 1
+        },
+        "LevelOneMap.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1292.6666666666665,
+                "y": 174
+            }
+        },
+        "LevelOneMap.tmx#tilemap-packed": {
+            "scaleInDock": 1
+        }
+    },
+    "last.exportedFilePath": "C:/Users/shred/Documents/CMPM 120/Projects/PlatformerLevel/assets",
+    "last.imagePath": "C:/Users/shred/Documents/CMPM 120/Projects/PlatformerLevel/assets",
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 18,
+    "map.tileWidth": 18,
+    "map.width": 120,
+    "openFiles": [
+        "LevelOneMap.tmx"
+    ],
+    "project": "level-one.tiled-project",
+    "property.type": "bool",
+    "recentFiles": [
+        "LevelOneMap.tmx"
+    ],
+    "tileset.embedInMap": true,
+    "tileset.tileSize": {
+        "height": 18,
+        "width": 18
+    }
+}
