@@ -20,7 +20,7 @@ class Load extends Phaser.Scene {
         });
 
         this.load.audio("spawnReset", "audio/powerUp1.ogg");
-        this.load.audio("coinPickup", "audio/powerup2.ogg");
+        this.load.audio("coinPickup", "audio/powerUp2.ogg");
         this.load.audio("keyPickup", "audio/powerUp5.ogg");
 
         this.load.bitmapFont("retro", "fonts/retro_0.png", "fonts/retro.fnt");
