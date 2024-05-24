@@ -19,6 +19,8 @@ class Load extends Phaser.Scene {
             frameHeight: 18
         });
 
+        this.load.multiatlas("kenny-particles", "kenny-particles.json");
+        
         this.load.audio("spawnReset", "audio/powerUp1.ogg");
         this.load.audio("coinPickup", "audio/powerUp2.ogg");
         this.load.audio("keyPickup", "audio/powerUp5.ogg");

@@ -135,7 +135,10 @@ class LevelOne extends Phaser.Scene {
             this.scene.get("textScene").setState("well done");
             my.sprite.player.body.setAccelerationX(0);
             my.sprite.player.body.setDragX(this.DRAG);
+
             my.sprite.player.anims.play("idle");
+            my.vfx.walking.stop();
+
             this.goodEnd = true;
         })
 
@@ -147,6 +150,27 @@ class LevelOne extends Phaser.Scene {
 
         this.restart = this.input.keyboard.addKey("R");
         cursors = this.input.keyboard.createCursorKeys();
+
+        // particle systems
+        my.vfx.walking = this.add.particles(0, 0, "kenny-particles", {
+            follow: my.sprite.player,
+            followOffset: { x: 0, y: 9 },
+            frame: ["smoke_01.png"],
+            frequency: 100,
+            lifespan: 250,
+            scale: { start: 0.03, end: 0.1 },
+            alpha: { start: 1, end: 0.1 }
+        })
+
+        my.vfx.jumping = this.add.particles(0, 0, "kenny-particles", {
+            follow: my.sprite.player,
+            followOffset: { x: 0, y: 5 },
+            frame: ["smoke_10.png"],
+            lifespan: 250,
+            scale: 0.05,
+            stopAfter: 1,
+            alpha: { start: 1, end: 0.1 }
+        })
 
         // camera behavior setup
         this.physics.world.bounds.setTo(0, 0, this.map.widthInPixels, this.map.heightInPixels);
@@ -161,36 +185,45 @@ class LevelOne extends Phaser.Scene {
     update() {
         let playerBody = my.sprite.player.body;
         if (!this.badEnd && !this.goodEnd) {
-            if (cursors.left.isDown) {
-                playerBody.setAccelerationX(-this.ACCELERATION);
+            if (cursors.left.isDown || cursors.right.isDown) {
+                if (cursors.left.isDown) {
+                    playerBody.setAccelerationX(-this.ACCELERATION);
 
-                my.sprite.player.resetFlip();
-                my.sprite.player.anims.play("walk", true);
-            } else if (cursors.right.isDown) {
-                playerBody.setAccelerationX(this.ACCELERATION);
+                    my.sprite.player.resetFlip();
+                    my.sprite.player.anims.play("walk", true);
+                } else if (cursors.right.isDown) {
+                    playerBody.setAccelerationX(this.ACCELERATION);
 
-                my.sprite.player.setFlip(true, false);
-                my.sprite.player.anims.play("walk", true);
+                    my.sprite.player.setFlip(true, false);
+                    my.sprite.player.anims.play("walk", true);
+                }
+
+                if (playerBody.blocked.down)
+                    my.vfx.walking.start();
+                else
+                    my.vfx.walking.stop();
             } else {
                 playerBody.setAccelerationX(0);
                 playerBody.setDragX(this.DRAG);
 
                 my.sprite.player.anims.play("idle");
+                my.vfx.walking.stop();
             }
 
-            if (playerBody.blocked.down)
+            if (playerBody.blocked.down) {
                 this.firstJump = this.secondJump = false;
-            else {
+            } else {
                 this.firstJump = true;
                 my.sprite.player.anims.play("jump");
             }
             if (Phaser.Input.Keyboard.JustDown(cursors.up)) {
-                if (!this.firstJump) {
-                    this.firstJump = true;
+                if (!this.secondJump) {
                     playerBody.setVelocityY(this.JUMP_VELOCITY);
-                } else if (!this.secondJump) {
-                    this.secondJump = true;
-                    playerBody.setVelocityY(this.JUMP_VELOCITY);
+                    my.vfx.jumping.start();
+                    if (!this.firstJump)
+                        this.firstJump = true;
+                    else
+                        this.secondJump = true;
                 }
             }
         } else {
