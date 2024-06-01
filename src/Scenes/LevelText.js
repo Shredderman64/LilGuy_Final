@@ -6,6 +6,7 @@ class LevelText extends Phaser.Scene {
     init() {
         this.score = 0;
         this.gameOver = false;
+        this.nextLevel = false;
         this.wellDone = false;
     }
 
@@ -16,15 +17,23 @@ class LevelText extends Phaser.Scene {
 
     update() {
         this.scoreText.setText("Life: " + this.score);
-        if (this.gameOver || this.wellDone) {
-            if (this.gameOver)
+        if (this.gameOver || this.nextLevel || this.wellDone) {
+            if (this.gameOver) {
                 this.add.bitmapText(game.config.width / 2, game.config.height / 2, "retro",
                 "GAME OVER", 50).setOrigin(0.5).setBlendMode(Phaser.BlendModes.ADD);
-            if (this.wellDone)
+                this.add.bitmapText(game.config.width / 2, (game.config.height / 2) + 40, "retro",
+                "Press R to restart", 32).setOrigin(0.5).setBlendMode(Phaser.BlendModes.ADD);
+            } else if (this.wellDone) {
                 this.add.bitmapText(game.config.width / 2, game.config.height / 2, "retro",
                 "WELL DONE", 50).setOrigin(0.5).setBlendMode(Phaser.BlendModes.ADD);
-            this.add.bitmapText(game.config.width / 2, (game.config.height / 2) + 40, "retro",
-            "Press R to restart", 32).setOrigin(0.5).setBlendMode(Phaser.BlendModes.ADD);
+                this.add.bitmapText(game.config.width / 2, (game.config.height / 2) + 40, "retro",
+                "Press R to return to menu", 32).setOrigin(0.5).setBlendMode(Phaser.BlendModes.ADD);
+            } else if (this.nextLevel) {
+                this.add.bitmapText(game.config.width / 2, game.config.height / 2, "retro",
+                "LEVEL COMPLETE", 50).setOrigin(0.5).setBlendMode(Phaser.BlendModes.ADD);
+                this.add.bitmapText(game.config.width / 2, (game.config.height / 2) + 40, "retro",
+                "Press N to continue", 32).setOrigin(0.5).setBlendMode(Phaser.BlendModes.ADD);
+            }
             this.scene.pause(this);
         }
     }
@@ -36,6 +45,8 @@ class LevelText extends Phaser.Scene {
     setState(data) {
         if (data === "game over")
             this.gameOver = true;
+        if (data === "next level")
+            this.nextLevel = true;
         if (data === "well done")
             this.wellDone = true;
     }
