@@ -12,17 +12,17 @@
         },
         "LevelOneMap.tmx": {
             "scale": 0.75,
-            "selectedLayer": 0,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 1292.6666666666665,
-                "y": 174
+                "x": 1738.6666666666665,
+                "y": 221.99999999999994
             }
         },
         "LevelOneMap.tmx#tilemap-packed": {
             "scaleInDock": 1
         }
     },
-    "last.exportedFilePath": "C:/Users/shred/Documents/CMPM 120/Projects/PlatformerLevel/assets",
+    "last.exportedFilePath": "C:/Users/shred/Documents/CMPM 120/Projects/LilGuy/assets/level01",
     "last.imagePath": "C:/Users/shred/Documents/CMPM 120/Projects/PlatformerLevel/assets",
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "map.lastUsedFormat": "tmx",
