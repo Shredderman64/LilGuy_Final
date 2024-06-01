@@ -169,13 +169,15 @@ class LevelTemplate extends Phaser.Scene {
 
     respawn() {
         this.cameras.main.shake(200, 0.005);
-        if (playerScore > 0)
+        if (playerScore > 0) {
             my.sprite.player.setPosition(this.spawnPointX, this.spawnPointY);
-        else {
+            this.sound.play("playerHurt", { rate: 2, volume: 0.5 });
+        } else {
             this.scene.get("textScene").setState("game over");
             my.vfx.walking.stop();
             my.sprite.player.destroy();
             this.badEnd = true;
+            this.sound.play("playerDeath");
         }
 
         playerScore -= 4;
@@ -232,6 +234,16 @@ class LevelTwo extends LevelTemplate {
 
         this.spawnPointX = 100;
         this.spawnPointY = 250;
+    }
+
+    create() {
+        super.create();
+
+        this.physics.add.overlap(my.sprite.player, this.goal, (obj1, obj2) => {
+            this.scene.get("textScene").setState("well done");
+            my.sprite.player.stop();
+            this.goodEnd = true;
+        })
     }
 
     update() {
