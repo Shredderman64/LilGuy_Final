@@ -154,9 +154,9 @@ class LevelTemplate extends Phaser.Scene {
         })
 
         // camera behavior setup
-        this.physics.world.bounds.setTo(0, 0, this.map.widthInPixels, this.map.heightInPixels);
+        this.physics.world.bounds.setTo(0, 0, this.map.widthInPixels, this.map.heightInPixels - 36);
 
-        this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
+        this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels - 36);
         this.cameras.main.startFollow(my.sprite.player, true, 0.25, 0.25);
         this.cameras.main.setZoom(3.5);
 
@@ -168,6 +168,7 @@ class LevelTemplate extends Phaser.Scene {
     }
 
     respawn() {
+        this.cameras.main.shake(200, 0.005);
         if (playerScore > 0)
             my.sprite.player.setPosition(this.spawnPointX, this.spawnPointY);
         else {
@@ -230,7 +231,7 @@ class LevelTwo extends LevelTemplate {
         super.init();
 
         this.spawnPointX = 100;
-        this.spawnPointY = 200;
+        this.spawnPointY = 250;
     }
 
     update() {
