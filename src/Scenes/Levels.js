@@ -10,9 +10,6 @@ class LevelTemplate extends Phaser.Scene {
 
         this.playerKeys = 0;
 
-        this.spawnPointX = 100;
-        this.spawnPointY = 250;
-
         this.badEnd = false;
         this.goodEnd = false;
 
@@ -132,6 +129,7 @@ class LevelTemplate extends Phaser.Scene {
             this.physics.world.debugGraphic.clear()
         }, this);
 
+        this.restart = this.input.keyboard.addKey("R");
         cursors = this.input.keyboard.createCursorKeys();
 
         // particle systems
@@ -161,6 +159,8 @@ class LevelTemplate extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
         this.cameras.main.startFollow(my.sprite.player, true, 0.25, 0.25);
         this.cameras.main.setZoom(3.5);
+
+        this.scene.launch("textScene");
     }
 
     update() {
@@ -191,21 +191,48 @@ class LevelOne extends LevelTemplate {
     init() {
         super.init();
         playerScore = 0;
+
+        this.spawnPointX = 100;
+        this.spawnPointY = 250;
     }
 
     create() {
         super.create();
 
         this.physics.add.overlap(my.sprite.player, this.goal, (obj1, obj2) => {
-            this.scene.get("textScene").setState("well done");
+            this.scene.get("textScene").setState("next level");
             my.sprite.player.stop();
             this.goodEnd = true;
         })
 
-        this.restart = this.input.keyboard.addKey("R");
-        this.scene.launch("textScene");
+        this.continue = this.input.keyboard.addKey("N");
     }
     
+    update() {
+        super.update();
+        if (!this.badEnd && !this.goodEnd)
+            my.sprite.player.update();
+        else {
+            if (this.restart.isDown && this.badEnd)
+                this.scene.restart(this);
+            else if (this.continue.isDown && this.goodEnd)
+                this.scene.start("levelTwoScene");
+        }
+    }
+}
+
+class LevelTwo extends LevelTemplate {
+    constructor() {
+        super("levelTwoScene", "level-two");
+    }
+
+    init() {
+        super.init();
+
+        this.spawnPointX = 100;
+        this.spawnPointY = 200;
+    }
+
     update() {
         super.update();
         if (!this.badEnd && !this.goodEnd)
