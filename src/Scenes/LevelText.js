@@ -23,16 +23,16 @@ class LevelText extends Phaser.Scene {
                 "GAME OVER", 50).setOrigin(0.5).setBlendMode(Phaser.BlendModes.ADD);
                 this.add.bitmapText(game.config.width / 2, (game.config.height / 2) + 40, "retro",
                 "Press R to restart", 32).setOrigin(0.5).setBlendMode(Phaser.BlendModes.ADD);
-            } else if (this.wellDone) {
-                this.add.bitmapText(game.config.width / 2, game.config.height / 2, "retro",
-                "WELL DONE", 50).setOrigin(0.5).setBlendMode(Phaser.BlendModes.ADD);
-                this.add.bitmapText(game.config.width / 2, (game.config.height / 2) + 40, "retro",
-                "Press R to return to menu", 32).setOrigin(0.5).setBlendMode(Phaser.BlendModes.ADD);
             } else if (this.nextLevel) {
                 this.add.bitmapText(game.config.width / 2, game.config.height / 2, "retro",
                 "LEVEL COMPLETE", 50).setOrigin(0.5).setBlendMode(Phaser.BlendModes.ADD);
                 this.add.bitmapText(game.config.width / 2, (game.config.height / 2) + 40, "retro",
                 "Press N to continue", 32).setOrigin(0.5).setBlendMode(Phaser.BlendModes.ADD);
+            } else if (this.wellDone) {
+                this.add.bitmapText(game.config.width / 2, game.config.height / 2, "retro",
+                "WELL DONE", 50).setOrigin(0.5).setBlendMode(Phaser.BlendModes.ADD);
+                this.add.bitmapText(game.config.width / 2, (game.config.height / 2) + 40, "retro",
+                "Press R to return to menu", 32).setOrigin(0.5).setBlendMode(Phaser.BlendModes.ADD);
             }
             this.scene.pause(this);
         }

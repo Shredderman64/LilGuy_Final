@@ -6,6 +6,9 @@ class LevelTemplate extends Phaser.Scene {
     }
 
     init() {
+        this.spawnPointX = 100;
+        this.spawnPointY = 250;
+
         this.physics.world.gravity.y = 1500;
 
         this.playerKeys = 0;
@@ -194,9 +197,6 @@ class LevelOne extends LevelTemplate {
     init() {
         super.init();
         playerScore = 0;
-
-        this.spawnPointX = 100;
-        this.spawnPointY = 250;
     }
 
     create() {
@@ -229,13 +229,6 @@ class LevelTwo extends LevelTemplate {
         super("levelTwoScene", "level-two");
     }
 
-    init() {
-        super.init();
-
-        this.spawnPointX = 100;
-        this.spawnPointY = 250;
-    }
-
     create() {
         super.create();
 
@@ -252,7 +245,7 @@ class LevelTwo extends LevelTemplate {
             my.sprite.player.update();
         else {
             if (this.restart.isDown)
-                this.scene.restart(this);
+                this.scene.start("levelOneScene");
         }
     }
 }
