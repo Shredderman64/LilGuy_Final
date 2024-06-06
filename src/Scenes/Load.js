@@ -29,6 +29,8 @@ class Load extends Phaser.Scene {
         this.load.audio("playerHurt", "audio/explosionCrunch_000.ogg");
         this.load.audio("playerDeath", "audio/explosionCrunch_004.ogg");
 
+        this.load.audio("bounce", "audio/phaseJump1.ogg");
+
         this.load.bitmapFont("retro", "fonts/retro_0.png", "fonts/retro.fnt");
     }
 
@@ -72,6 +74,6 @@ class Load extends Phaser.Scene {
             repeat: -1
         })
 
-        this.scene.start("levelTwoScene");
+        this.scene.start("levelOneScene");
     }
 }
