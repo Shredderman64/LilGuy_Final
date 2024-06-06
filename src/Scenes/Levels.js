@@ -226,7 +226,7 @@ class LevelTwo extends LevelTemplate {
             my.sprite.player.update();
         else {
             if (this.restart.isDown)
-                this.scene.start("levelOneScene");
+                this.scene.start("menuScene");
         }
     }
 }
