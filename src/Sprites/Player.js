@@ -3,6 +3,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         super(scene, x, y, texture, frame);
 
         this.cursors = cursors;
+        this.parentScene = scene;
 
         scene.add.existing(this);
         scene.physics.add.existing(this);
@@ -75,6 +76,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         if (Phaser.Input.Keyboard.JustDown(cursors.up)) {
             if (!this.secondJump) {
                 this.body.setVelocityY(this.JUMP_VELOCITY);
+                this.parentScene.sound.play("bounce", { volume: 0.3 });
                 my.vfx.jumping.start();
                 if (!this.firstJump)
                     this.firstJump = true;
