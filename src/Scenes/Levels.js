@@ -225,8 +225,10 @@ class LevelTwo extends LevelTemplate {
         if (!this.badEnd && !this.goodEnd)
             my.sprite.player.update();
         else {
-            if (this.restart.isDown)
+            if (this.restart.isDown) {
                 this.scene.start("menuScene");
+                this.scene.stop("textScene");
+            }
         }
     }
 }
