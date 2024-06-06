@@ -106,6 +106,7 @@ class LevelTemplate extends Phaser.Scene {
         this.physics.add.overlap(my.sprite.player, this.coinGroup, (obj1, obj2) => {
             playerScore++;
             this.sound.play("coinPickup");
+            my.sprite.player.sparkle(obj2);
             obj2.destroy();
         })
 
@@ -116,6 +117,7 @@ class LevelTemplate extends Phaser.Scene {
                     barrier.destroy();
             }
             this.sound.play("keyPickup");
+            my.sprite.player.sparkle(obj2);
             obj2.destroy();
         })
 
@@ -134,27 +136,6 @@ class LevelTemplate extends Phaser.Scene {
 
         this.restart = this.input.keyboard.addKey("R");
         cursors = this.input.keyboard.createCursorKeys();
-
-        // particle systems
-        my.vfx.walking = this.add.particles(0, 0, "kenny-particles", {
-            alpha: { start: 1, end: 0.1 },
-            follow: my.sprite.player,
-            followOffset: { x: 0, y: 9 },
-            frame: ["smoke_01.png"],
-            frequency: 100,
-            lifespan: 250,
-            scale: { start: 0.03, end: 0.1 }
-        })
-
-        my.vfx.jumping = this.add.particles(0, 0, "kenny-particles", {
-            alpha: { start: 1, end: 0.1 },
-            follow: my.sprite.player,
-            followOffset: { x: 0, y: 5 },
-            frame: ["smoke_10.png"],
-            lifespan: 250,
-            scale: { start: 0.03, end: 0.07 },
-            stopAfter: 1
-        })
 
         // camera behavior setup
         this.physics.world.bounds.setTo(0, 0, this.map.widthInPixels, this.map.heightInPixels - 36);

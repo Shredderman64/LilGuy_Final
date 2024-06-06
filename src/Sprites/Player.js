@@ -7,6 +7,34 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         scene.add.existing(this);
         scene.physics.add.existing(this);
 
+        my.vfx.walking = scene.add.particles(0, 0, "kenny-particles", {
+            alpha: { start: 1, end: 0.1 },
+            follow: this,
+            followOffset: { x: 0, y: 9 },
+            frame: ["smoke_01.png"],
+            frequency: 100,
+            lifespan: 250,
+            scale: { start: 0.03, end: 0.1 }
+        })
+
+        my.vfx.jumping = scene.add.particles(0, 0, "kenny-particles", {
+            alpha: { start: 1, end: 0.1 },
+            follow: this,
+            followOffset: { x: 0, y: 5 },
+            frame: ["smoke_10.png"],
+            lifespan: 250,
+            scale: { start: 0.03, end: 0.07 },
+            stopAfter: 1
+        })
+
+        my.vfx.sparkle = scene.add.particles(0, 0, "kenny-particles", {
+            alpha: { start: 1, end: 0.1 },
+            frame: ["star_06.png"],
+            lifespan: 250,
+            scale: { start: 0.05, end: 0.01 },
+            stopAfter: 1
+        })
+
         this.ACCELERATION = 2560;
         this.DRAG = 2560;
         this.JUMP_VELOCITY = -700;
@@ -62,5 +90,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.anims.play("idle");
         my.vfx.walking.stop();
+    }
+
+    sparkle(obj) {
+        my.vfx.sparkle.particleX = obj.x;
+        my.vfx.sparkle.particleY = obj.y;
+        my.vfx.sparkle.start();
     }
 }
