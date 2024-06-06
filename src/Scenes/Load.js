@@ -6,6 +6,9 @@ class Load extends Phaser.Scene {
     preload() {
         this.load.setPath("./assets/");
 
+        this.load.image("menu_background", "lilguy_background.png");
+        this.load.image("menu_foreground", "ground_tile.png");
+
         this.load.spritesheet("tilemap_characters", "tilemap-characters_packed.png", {
             frameWidth: 24,
             frameHeight: 24
@@ -74,6 +77,6 @@ class Load extends Phaser.Scene {
             repeat: -1
         })
 
-        this.scene.start("levelOneScene");
+        this.scene.start("menuScene");
     }
 }
