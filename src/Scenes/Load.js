@@ -77,6 +77,44 @@ class Load extends Phaser.Scene {
             repeat: -1
         })
 
+        this.anims.create({
+            key: "enemyWalk",
+            defaultTextureKey: "tilemap_characters",
+            frames: [
+                { frame: 18 }, { frame: 19 }
+            ],
+            frameRate: 15,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: "enemyIdle",
+            defaultTextureKey: "tilemap_characters",
+            frames: [
+                { frame: 19 }
+            ],
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: "enemyProjIdle",
+            defaultTextureKey: "tilemap_characters",
+            frames: [
+                { frame: 11 }
+            ],
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: "enemyProjShoot",
+            defaultTextureKey: "tilemap_characters",
+            frames: [
+                { frame: 12 }
+            ],
+            frameRate: 15,
+            repeat: -1
+        })
+
         this.scene.start("menuScene");
     }
 }
