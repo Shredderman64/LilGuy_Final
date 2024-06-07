@@ -88,15 +88,6 @@ class Load extends Phaser.Scene {
         })
 
         this.anims.create({
-            key: "enemyIdle",
-            defaultTextureKey: "tilemap_characters",
-            frames: [
-                { frame: 19 }
-            ],
-            repeat: -1
-        })
-
-        this.anims.create({
             key: "enemyProjIdle",
             defaultTextureKey: "tilemap_characters",
             frames: [
