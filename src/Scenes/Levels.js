@@ -215,10 +215,14 @@ class LevelTwo extends LevelTemplate {
 
         this.enemyPatrolSpawn = this.map.createFromObjects("Objects", {
             name: "enemyPatrolSpawn",
+            key: "tilemap_characters",
+            frame: 18
         })
 
         this.enemyLobSpawn = this.map.createFromObjects("Objects", {
             name: "enemyLobSpawn",
+            key: "tilemap_characters",
+            frame: 11
         })
 
         this.patrolBlock = this.map.createFromObjects("Objects", {
