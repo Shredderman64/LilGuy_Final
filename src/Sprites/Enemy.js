@@ -19,11 +19,11 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         if (this.body) {
             this.body.setVelocityX(-this.VELOCITY);
             this.anims.play("enemyWalk", true);
-            if (this.body.velocity.x == 0 && this.goLeft == true) {
+            if (this.goLeft == true) {
                 this.body.setVelocityX(this.VELOCITY);
                 this.setFlip(true, false);
             }
-            else if (this.body.velocity.x == 0 && this.goRight == true){
+            else if (this.goRight == true){
                 this.body.setVelocityX(-this.VELOCITY);
                 this.resetFlip();
             }    

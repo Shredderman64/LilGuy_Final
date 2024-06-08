@@ -243,9 +243,22 @@ class LevelTwo extends LevelTemplate {
 
         for (let i = 0; i < this.enemyLobSpawn.length; i++)
             {
-                let enemy2 = new EnemyLob(this, this.enemyLobSpawn[i].x, this.enemyLobSpawn[i].y, "tilemap_characters", 21);
+                let enemy2 = new EnemyLob(this, this.enemyLobSpawn[i].x, this.enemyLobSpawn[i].y, "tilemap_characters", 11);
                 this.enemies2.push(enemy2);
             }    
+
+        for (let barrier of this.barriers)
+            this.physics.add.collider(this.enemies, barrier, (obj1, obj2) => {
+                //this.respawn();
+                if (obj1.goLeft){
+                    obj1.goLeft = false;
+                    obj1.goRight = true;
+                }
+                else {
+                    obj1.goLeft = true;
+                    obj1.goRight = false;
+                }
+                })    
         
         this.physics.add.overlap(my.sprite.player, this.enemies, (obj1, obj2) => {
             //this.respawn();
@@ -254,9 +267,14 @@ class LevelTwo extends LevelTemplate {
 
             this.physics.add.collider(this.enemies, this.patrolBlockGroup, (obj1, obj2) => {
                 //this.respawn();
-                obj1.setVelocityX(0);
-                obj1.goLeft = false;
-                obj1.goRight = true;
+                if (obj1.goLeft){
+                    obj1.goLeft = false;
+                    obj1.goRight = true;
+                }
+                else {
+                    obj1.goLeft = true;
+                    obj1.goRight = false;
+                }
                 })    
 
 
