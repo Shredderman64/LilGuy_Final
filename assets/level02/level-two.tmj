@@ -1016,30 +1016,6 @@
                  "y":160.625
                 }, 
                 {
-                 "gid":379,
-                 "height":24,
-                 "id":104,
-                 "name":"enemyPatrolSpawn",
-                 "rotation":0,
-                 "type":"",
-                 "visible":false,
-                 "width":24,
-                 "x":1328.5,
-                 "y":323
-                }, 
-                {
-                 "gid":379,
-                 "height":24,
-                 "id":105,
-                 "name":"enemyPatrolSpawn",
-                 "rotation":0,
-                 "type":"",
-                 "visible":false,
-                 "width":24,
-                 "x":1184.5,
-                 "y":322.5
-                }, 
-                {
                  "gid":372,
                  "height":24,
                  "id":106,
@@ -1244,16 +1220,28 @@
                  "y":395.667
                 }, 
                 {
-                 "gid":1,
-                 "height":18,
-                 "id":156,
-                 "name":"enemySpawn",
+                 "gid":369,
+                 "height":24,
+                 "id":157,
+                 "name":"enemySpikeSpawn",
                  "rotation":0,
                  "type":"",
                  "visible":false,
-                 "width":18,
-                 "x":612,
-                 "y":396
+                 "width":24,
+                 "x":1193.33,
+                 "y":334.667
+                }, 
+                {
+                 "gid":369,
+                 "height":24,
+                 "id":158,
+                 "name":"enemySpikeSpawn",
+                 "rotation":0,
+                 "type":"",
+                 "visible":false,
+                 "width":24,
+                 "x":1320.67,
+                 "y":336.667
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1262,7 +1250,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":157,
+ "nextobjectid":159,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",

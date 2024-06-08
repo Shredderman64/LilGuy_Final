@@ -102,7 +102,15 @@ class Load extends Phaser.Scene {
             frames: [
                 { frame: 12 }
             ],
-            frameRate: 15,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: "enemySpikeWalk",
+            defaultTextureKey: "tilemap_characters",
+            frames: [
+                { frame: 8 }
+            ],
             repeat: -1
         })
 

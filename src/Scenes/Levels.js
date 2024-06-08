@@ -225,6 +225,12 @@ class LevelTwo extends LevelTemplate {
             frame: 11
         })
 
+        this.enemySpikeSpawn = this.map.createFromObjects("Objects", {
+            name: "enemySpikeSpawn",
+            key: "tilemap_characters",
+            frame: 8
+        })
+
         this.patrolBlock = this.map.createFromObjects("Objects", {
             name: "patrolBlock"
         })
@@ -234,6 +240,7 @@ class LevelTwo extends LevelTemplate {
 
         this.enemies = [];
         this.enemies2 = [];
+        this.enemies3 = [];
         
         for (let i = 0; i < this.enemyPatrolSpawn.length; i++)
             {
@@ -245,7 +252,13 @@ class LevelTwo extends LevelTemplate {
             {
                 let enemy2 = new EnemyLob(this, this.enemyLobSpawn[i].x, this.enemyLobSpawn[i].y, "tilemap_characters", 11);
                 this.enemies2.push(enemy2);
-            }    
+            } 
+        
+        for (let i = 0; i < this.enemySpikeSpawn.length; i++)
+            {
+                let enemy3 = new EnemySpike(this, this.enemySpikeSpawn[i].x, this.enemySpikeSpawn[i].y, "tilemap_characters", 8);
+                this.enemies3.push(enemy3);
+            }     
 
         for (let enemy of this.enemies) {
             enemy.body.setSize(9, 9);
@@ -264,24 +277,41 @@ class LevelTwo extends LevelTemplate {
                 }
                 })    
         
-        this.physics.add.collider(my.sprite.player, this.enemies, (obj1, obj2) => {
-            if (obj2.body.touching.up && obj1.body.touching.down)
-                obj2.destroy();
-            else
+        this.physics.add.overlap(my.sprite.player, this.enemies, (obj1, obj2) => {
+            if (obj1.body.touching.down && obj2.body.touching.up)
+                {
+                    obj2.destroy();
+                }
+            else {
                 this.respawn();
+            }    
             })
 
-            this.physics.add.collider(this.enemies, this.patrolBlockGroup, (obj1, obj2) => {
-                //this.respawn();
-                if (obj1.goLeft){
-                    obj1.goLeft = false;
-                    obj1.goRight = true;
-                }
-                else {
-                    obj1.goLeft = true;
-                    obj1.goRight = false;
-                }
-                })    
+        this.physics.add.overlap(my.sprite.player, this.enemies3, (obj1, obj2) => {
+            this.respawn();  
+            })    
+
+        this.physics.add.collider(this.enemies, this.patrolBlockGroup, (obj1, obj2) => {
+            if (obj1.goLeft){
+                obj1.goLeft = false;
+                obj1.goRight = true;
+            }
+            else {
+                obj1.goLeft = true;
+                obj1.goRight = false;
+            }
+            })  
+            
+        this.physics.add.collider(this.enemies3, this.patrolBlockGroup, (obj1, obj2) => {
+            if (obj1.goLeft){
+                obj1.goLeft = false;
+                obj1.goRight = true;
+            }
+            else {
+                obj1.goLeft = true;
+                obj1.goRight = false;
+            }
+            })    
 
 
         this.physics.add.overlap(my.sprite.player, this.goal, (obj1, obj2) => {
@@ -295,6 +325,9 @@ class LevelTwo extends LevelTemplate {
         super.update();
         for (let enemy of this.enemies){
             enemy.update();
+        }
+        for (let enemy3 of this.enemies3){
+            enemy3.update();
         }
         if (!this.badEnd && !this.goodEnd)
             my.sprite.player.update();
