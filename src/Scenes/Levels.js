@@ -213,30 +213,22 @@ class LevelTwo extends LevelTemplate {
     create() {
         super.create();
 
-        this.enemies = this.map.createFromObjects("Objects", {
-            name: "enemyPatrol",
-            key: "tilemap_characters",
-            frame: 18
+        this.enemyPatrolSpawn = this.map.createFromObjects("Objects", {
+            name: "enemyPatrolSpawn",
         })
 
-        this.projectiles = this.map.createFromObjects("Objects", {
-            name: "enemyLob",
-            key: "tilemap_characters",
-            frame: 11
+        this.enemyLobSpawn = this.map.createFromObjects("Objects", {
+            name: "enemyLobSpawn",
         })
 
         this.patrolBlock = this.map.createFromObjects("Objects", {
             name: "patrolBlock"
         })
 
-        this.enemySpawn = this.map.createFromObjects("Objects", {
-            name: "enemySpawn"
-        })
-
         this.physics.world.enable(this.patrolBlock, Phaser.Physics.Arcade.STATIC_BODY);
         this.patrolBlockGroup = this.add.group(this.patrolBlock);
 
-        this.enemy = new Enemy(this, this.enemySpawn[0].x, this.enemySpawn[0].y, "tilemap_characters", 18);
+        this.enemy = new Enemy(this, this.enemyPatrolSpawn[0].x, this.enemyPatrolSpawn[0].y, "tilemap_characters", 18);
         
         this.physics.add.overlap(my.sprite.player, this.goal, (obj1, obj2) => {
             this.scene.get("textScene").setState("well done");

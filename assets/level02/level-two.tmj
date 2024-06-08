@@ -950,7 +950,7 @@
                  "name":"enemyPatrolSpawn",
                  "rotation":0,
                  "type":"",
-                 "visible":false,
+                 "visible":true,
                  "width":24,
                  "x":500,
                  "y":394.5
@@ -962,7 +962,7 @@
                  "name":"enemyPatrolSpawn",
                  "rotation":0,
                  "type":"",
-                 "visible":false,
+                 "visible":true,
                  "width":24,
                  "x":608.5,
                  "y":304
@@ -974,7 +974,7 @@
                  "name":"enemyPatrolSpawn",
                  "rotation":0,
                  "type":"",
-                 "visible":false,
+                 "visible":true,
                  "width":24,
                  "x":392.5,
                  "y":304
@@ -986,7 +986,7 @@
                  "name":"enemyPatrolSpawn",
                  "rotation":0,
                  "type":"",
-                 "visible":false,
+                 "visible":true,
                  "width":24,
                  "x":1544.5,
                  "y":160.25
@@ -998,7 +998,7 @@
                  "name":"enemyPatrolSpawn",
                  "rotation":0,
                  "type":"",
-                 "visible":false,
+                 "visible":true,
                  "width":24,
                  "x":1814,
                  "y":340
@@ -1010,7 +1010,7 @@
                  "name":"enemyPatrolSpawn",
                  "rotation":0,
                  "type":"",
-                 "visible":false,
+                 "visible":true,
                  "width":24,
                  "x":2084.13,
                  "y":160.625
@@ -1022,7 +1022,7 @@
                  "name":"enemyPatrolSpawn",
                  "rotation":0,
                  "type":"",
-                 "visible":false,
+                 "visible":true,
                  "width":24,
                  "x":1328.5,
                  "y":323
@@ -1034,7 +1034,7 @@
                  "name":"enemyPatrolSpawn",
                  "rotation":0,
                  "type":"",
-                 "visible":false,
+                 "visible":true,
                  "width":24,
                  "x":1184.5,
                  "y":322.5
@@ -1046,7 +1046,7 @@
                  "name":"enemyLobSpawn",
                  "rotation":0,
                  "type":"",
-                 "visible":false,
+                 "visible":true,
                  "width":24,
                  "x":1724.5,
                  "y":74.5
@@ -1058,7 +1058,7 @@
                  "name":"enemyLobSpawn",
                  "rotation":0,
                  "type":"",
-                 "visible":false,
+                 "visible":true,
                  "width":24,
                  "x":1905,
                  "y":75
@@ -1070,7 +1070,7 @@
                  "name":"enemyLobSpawn",
                  "rotation":0,
                  "type":"",
-                 "visible":false,
+                 "visible":true,
                  "width":24,
                  "x":1635,
                  "y":382
@@ -1082,7 +1082,7 @@
                  "name":"enemyLobSpawn",
                  "rotation":0,
                  "type":"",
-                 "visible":false,
+                 "visible":true,
                  "width":24,
                  "x":1995,
                  "y":382
@@ -1239,11 +1239,6 @@
                  "rotation":0,
                  "type":"",
                  "visible":false,
-<<<<<<< HEAD
-                 "width":18,
-                 "x":197.667,
-                 "y":395.667
-=======
                  "width":18,
                  "x":197.667,
                  "y":395.667
@@ -1255,11 +1250,10 @@
                  "name":"enemySpawn",
                  "rotation":0,
                  "type":"",
-                 "visible":true,
+                 "visible":false,
                  "width":18,
                  "x":612,
                  "y":396
->>>>>>> c8d6c175cdee1b1f3de383405a23044e0abcb55b
                 }],
          "opacity":1,
          "type":"objectgroup",
