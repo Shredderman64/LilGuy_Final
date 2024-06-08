@@ -69,22 +69,6 @@ class LevelTemplate extends Phaser.Scene {
             name: "goal"
         })
 
-        this.goal = this.map.createFromObjects("Objects", {
-            name: "enemyPatrol",
-            key: "tilemap_characters",
-            frame: 18
-        })
-
-        this.goal = this.map.createFromObjects("Objects", {
-            name: "enemyLob",
-            key: "tilemap_characters",
-            frame: 11
-        })
-
-        this.goal = this.map.createFromObjects("Objects", {
-            name: "patrolBlock"
-        })
-
         this.physics.world.enable(this.coins, Phaser.Physics.Arcade.STATIC_BODY);
         this.coinGroup = this.add.group(this.coins);
 
@@ -97,9 +81,6 @@ class LevelTemplate extends Phaser.Scene {
         this.pointGroup = this.add.group(this.checkpoints);
 
         this.physics.world.enable(this.goal, Phaser.Physics.Arcade.STATIC_BODY);
-
-        this.physics.world.enable(this.patrolBlock, Phaser.Physics.Arcade.STATIC_BODY);
-        this.patrolBlockGroup = this.add.group(this.patrolBlock);
 
         for (let coin of this.coins)
             coin.anims.play("spin");
@@ -232,6 +213,25 @@ class LevelTwo extends LevelTemplate {
     create() {
         super.create();
 
+        this.enemies = this.map.createFromObjects("Objects", {
+            name: "enemyPatrol",
+            key: "tilemap_characters",
+            frame: 18
+        })
+
+        this.projectiles = this.map.createFromObjects("Objects", {
+            name: "enemyLob",
+            key: "tilemap_characters",
+            frame: 11
+        })
+
+        this.patrolBlock = this.map.createFromObjects("Objects", {
+            name: "patrolBlock"
+        })
+
+        this.physics.world.enable(this.patrolBlock, Phaser.Physics.Arcade.STATIC_BODY);
+        this.patrolBlockGroup = this.add.group(this.patrolBlock);
+        
         this.physics.add.overlap(my.sprite.player, this.goal, (obj1, obj2) => {
             this.scene.get("textScene").setState("well done");
             my.sprite.player.stop();
