@@ -106,6 +106,6 @@ class Load extends Phaser.Scene {
             repeat: -1
         })
 
-        this.scene.start("menuScene");
+        this.scene.start("levelTwoScene");
     }
 }
