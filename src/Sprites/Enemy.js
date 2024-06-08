@@ -4,9 +4,10 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
 
         
         scene.add.existing(this);
-        //scene.physics.add.existing(this);
+        scene.physics.add.existing(this);
+        this.body.setAllowGravity(false);
 
-        this.VELOCITY = 500;
+        this.VELOCITY = 50;
 
         this.goLeft = true;
         this.goRight = false;
@@ -15,23 +16,18 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     }
 
     update() {
-        /*
-        this.body.setVelocityX(-this.VELOCITY);
-        if (this.body.velocity.x == 0 && this.goLeft == true) {
-            this.body.setVelocityX(this.VELOCITY);
-            this.setFlip(true, false);
-            this.anims.play("enemyWalk", true);
-            this.goLeft = false;
-            this.goRight = true;
-        }
-        else if (this.body.velocity.x == 0 && this.goRight == true){
+        if (this.body) {
             this.body.setVelocityX(-this.VELOCITY);
-            this.resetFlip();
             this.anims.play("enemyWalk", true);
-            this.goLeft = true;
-            this.goRight = false;
-        }    
-        */
+            if (this.body.velocity.x == 0 && this.goLeft == true) {
+                this.body.setVelocityX(this.VELOCITY);
+                this.setFlip(true, false);
+            }
+            else if (this.body.velocity.x == 0 && this.goRight == true){
+                this.body.setVelocityX(-this.VELOCITY);
+                this.resetFlip();
+            }    
+        }
     }
 
 }

@@ -208,6 +208,9 @@ class LevelOne extends LevelTemplate {
 class LevelTwo extends LevelTemplate {
     constructor() {
         super("levelTwoScene", "level-two");
+
+        this.enemies = [];
+        this.enemies2 = [];
     }
 
     create() {
@@ -232,8 +235,31 @@ class LevelTwo extends LevelTemplate {
         this.physics.world.enable(this.patrolBlock, Phaser.Physics.Arcade.STATIC_BODY);
         this.patrolBlockGroup = this.add.group(this.patrolBlock);
 
-        this.enemy = new Enemy(this, this.enemyPatrolSpawn[0].x, this.enemyPatrolSpawn[0].y, "tilemap_characters", 18);
+        for (let i = 0; i < this.enemyPatrolSpawn.length; i++)
+            {
+                let enemy = new Enemy(this, this.enemyPatrolSpawn[i].x, this.enemyPatrolSpawn[i].y, "tilemap_characters", 18);
+                this.enemies.push(enemy);
+            }
+
+        for (let i = 0; i < this.enemyLobSpawn.length; i++)
+            {
+                let enemy2 = new EnemyLob(this, this.enemyLobSpawn[i].x, this.enemyLobSpawn[i].y, "tilemap_characters", 21);
+                this.enemies2.push(enemy2);
+            }    
         
+        this.physics.add.overlap(my.sprite.player, this.enemies, (obj1, obj2) => {
+            //this.respawn();
+            obj2.destroy();
+            })
+
+            this.physics.add.collider(this.enemies, this.patrolBlockGroup, (obj1, obj2) => {
+                //this.respawn();
+                obj1.setVelocityX(0);
+                obj1.goLeft = false;
+                obj1.goRight = true;
+                })    
+
+
         this.physics.add.overlap(my.sprite.player, this.goal, (obj1, obj2) => {
             this.scene.get("textScene").setState("well done");
             my.sprite.player.stop();
@@ -243,6 +269,9 @@ class LevelTwo extends LevelTemplate {
 
     update() {
         super.update();
+        for (let enemy of this.enemies){
+            enemy.update();
+        }
         if (!this.badEnd && !this.goodEnd)
             my.sprite.player.update();
         else {
