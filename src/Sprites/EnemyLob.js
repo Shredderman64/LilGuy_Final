@@ -15,7 +15,7 @@ class EnemyLob extends Phaser.Physics.Arcade.Sprite {
     update() {
         this.timer++;
         if (this.timer == 600 && !this.shoot) {
-            
+            //spawn projectile idk
         }
     }
 
