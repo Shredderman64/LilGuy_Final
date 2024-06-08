@@ -208,9 +208,6 @@ class LevelOne extends LevelTemplate {
 class LevelTwo extends LevelTemplate {
     constructor() {
         super("levelTwoScene", "level-two");
-
-        this.enemies = [];
-        this.enemies2 = [];
     }
 
     create() {
@@ -235,6 +232,9 @@ class LevelTwo extends LevelTemplate {
         this.physics.world.enable(this.patrolBlock, Phaser.Physics.Arcade.STATIC_BODY);
         this.patrolBlockGroup = this.add.group(this.patrolBlock);
 
+        this.enemies = [];
+        this.enemies2 = [];
+        
         for (let i = 0; i < this.enemyPatrolSpawn.length; i++)
             {
                 let enemy = new Enemy(this, this.enemyPatrolSpawn[i].x, this.enemyPatrolSpawn[i].y, "tilemap_characters", 18);
