@@ -1094,10 +1094,10 @@
                  "name":"patrolBlock",
                  "rotation":0,
                  "type":"",
-                 "visible":true,
+                 "visible":false,
                  "width":18,
-                 "x":2142.33333333333,
-                 "y":161.666666666667
+                 "x":2142.33,
+                 "y":161.667
                 }, 
                 {
                  "gid":1,
@@ -1106,9 +1106,9 @@
                  "name":"patrolBlock",
                  "rotation":0,
                  "type":"",
-                 "visible":true,
+                 "visible":false,
                  "width":18,
-                 "x":2034.33333333333,
+                 "x":2034.33,
                  "y":161
                 }, 
                 {
@@ -1118,10 +1118,10 @@
                  "name":"patrolBlock",
                  "rotation":0,
                  "type":"",
-                 "visible":true,
+                 "visible":false,
                  "width":18,
-                 "x":1889.66666666667,
-                 "y":342.333333333333
+                 "x":1889.67,
+                 "y":342.333
                 }, 
                 {
                  "gid":1,
@@ -1130,10 +1130,10 @@
                  "name":"patrolBlock",
                  "rotation":0,
                  "type":"",
-                 "visible":true,
+                 "visible":false,
                  "width":18,
-                 "x":1746.33333333333,
-                 "y":341.666666666667
+                 "x":1746.33,
+                 "y":341.667
                 }, 
                 {
                  "gid":1,
@@ -1142,9 +1142,9 @@
                  "name":"patrolBlock",
                  "rotation":0,
                  "type":"",
-                 "visible":true,
+                 "visible":false,
                  "width":18,
-                 "x":1602.33333333333,
+                 "x":1602.33,
                  "y":163
                 }, 
                 {
@@ -1154,10 +1154,10 @@
                  "name":"patrolBlock",
                  "rotation":0,
                  "type":"",
-                 "visible":true,
+                 "visible":false,
                  "width":18,
-                 "x":1494.33333333333,
-                 "y":161.666666666667
+                 "x":1494.33,
+                 "y":161.667
                 }, 
                 {
                  "gid":1,
@@ -1166,7 +1166,7 @@
                  "name":"patrolBlock",
                  "rotation":0,
                  "type":"",
-                 "visible":true,
+                 "visible":false,
                  "width":18,
                  "x":1387,
                  "y":323
@@ -1178,10 +1178,10 @@
                  "name":"patrolBlock",
                  "rotation":0,
                  "type":"",
-                 "visible":true,
+                 "visible":false,
                  "width":18,
-                 "x":1259.66666666667,
-                 "y":323.666666666667
+                 "x":1259.67,
+                 "y":323.667
                 }, 
                 {
                  "gid":1,
@@ -1190,10 +1190,10 @@
                  "name":"patrolBlock",
                  "rotation":0,
                  "type":"",
-                 "visible":true,
+                 "visible":false,
                  "width":18,
-                 "x":1134.33333333333,
-                 "y":324.333333333333
+                 "x":1134.33,
+                 "y":324.333
                 }, 
                 {
                  "gid":1,
@@ -1202,10 +1202,10 @@
                  "name":"patrolBlock",
                  "rotation":0,
                  "type":"",
-                 "visible":true,
+                 "visible":false,
                  "width":18,
-                 "x":683.666666666667,
-                 "y":306.333333333333
+                 "x":683.667,
+                 "y":306.333
                 }, 
                 {
                  "gid":1,
@@ -1214,10 +1214,10 @@
                  "name":"patrolBlock",
                  "rotation":0,
                  "type":"",
-                 "visible":true,
+                 "visible":false,
                  "width":18,
-                 "x":324.333333333333,
-                 "y":305.666666666667
+                 "x":324.333,
+                 "y":305.667
                 }, 
                 {
                  "gid":1,
@@ -1226,10 +1226,10 @@
                  "name":"patrolBlock",
                  "rotation":0,
                  "type":"",
-                 "visible":true,
+                 "visible":false,
                  "width":18,
-                 "x":792.333333333333,
-                 "y":395.666666666667
+                 "x":792.333,
+                 "y":395.667
                 }, 
                 {
                  "gid":1,
@@ -1238,10 +1238,22 @@
                  "name":"patrolBlock",
                  "rotation":0,
                  "type":"",
+                 "visible":false,
+                 "width":18,
+                 "x":197.667,
+                 "y":395.667
+                }, 
+                {
+                 "gid":1,
+                 "height":18,
+                 "id":156,
+                 "name":"enemySpawn",
+                 "rotation":0,
+                 "type":"",
                  "visible":true,
                  "width":18,
-                 "x":197.666666666667,
-                 "y":395.666666666667
+                 "x":612,
+                 "y":396
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1250,7 +1262,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":156,
+ "nextobjectid":157,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",
