@@ -277,11 +277,9 @@ class LevelTwo extends LevelTemplate {
                 }
                 })    
         
-        this.physics.add.overlap(my.sprite.player, this.enemies, (obj1, obj2) => {
+        this.physics.add.collider(my.sprite.player, this.enemies, (obj1, obj2) => {
             if (obj1.body.touching.down && obj2.body.touching.up)
-                {
-                    obj2.destroy();
-                }
+                obj2.destroy();
             else {
                 this.respawn();
             }    
@@ -332,10 +330,10 @@ class LevelTwo extends LevelTemplate {
         if (!this.badEnd && !this.goodEnd)
             my.sprite.player.update();
         else {
-            if (this.restart.isDown) {
+            if (this.restart.isDown && this.badEnd)
+                this.scene.restart(this);
+            else if (this.restart.isDown && this.goodEnd)
                 this.scene.start("menuScene");
-                this.scene.stop("textScene");
-            }
         }
     }
 }
