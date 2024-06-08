@@ -247,6 +247,10 @@ class LevelTwo extends LevelTemplate {
                 this.enemies2.push(enemy2);
             }    
 
+        for (let enemy of this.enemies) {
+            enemy.body.setSize(9, 9);
+        }
+
         for (let barrier of this.barriers)
             this.physics.add.collider(this.enemies, barrier, (obj1, obj2) => {
                 //this.respawn();
@@ -260,9 +264,11 @@ class LevelTwo extends LevelTemplate {
                 }
                 })    
         
-        this.physics.add.overlap(my.sprite.player, this.enemies, (obj1, obj2) => {
-            //this.respawn();
-            obj2.destroy();
+        this.physics.add.collider(my.sprite.player, this.enemies, (obj1, obj2) => {
+            if (obj2.body.touching.up && obj1.body.touching.down)
+                obj2.destroy();
+            else
+                this.respawn();
             })
 
             this.physics.add.collider(this.enemies, this.patrolBlockGroup, (obj1, obj2) => {
