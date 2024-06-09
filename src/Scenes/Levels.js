@@ -327,6 +327,9 @@ class LevelTwo extends LevelTemplate {
         for (let enemy of this.enemies){
             enemy.update();
         }
+        for (let enemy2 of this.enemies2){
+            enemy2.update();
+        }
         for (let enemy3 of this.enemies3){
             enemy3.update();
         }
