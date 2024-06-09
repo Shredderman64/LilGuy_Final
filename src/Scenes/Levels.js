@@ -152,6 +152,7 @@ class LevelTemplate extends Phaser.Scene {
         this.scene.get("textScene").setScore(playerScore);
     }
 
+    // player respawn behavior
     respawn() {
         this.cameras.main.shake(200, 0.005);
         if (playerScore > 0) {
@@ -184,19 +185,24 @@ class LevelOne extends LevelTemplate {
     create() {
         super.create();
 
+        // create end goal and associated behavior
         this.physics.add.overlap(my.sprite.player, this.goal, (obj1, obj2) => {
             this.scene.get("textScene").setState("next level");
             my.sprite.player.stop();
             this.goodEnd = true;
         })
 
+        // continue key
         this.continue = this.input.keyboard.addKey("N");
     }
     
     update() {
         super.update();
+
+        // player update
         if (!this.badEnd && !this.goodEnd)
             my.sprite.player.update();
+        // game restart or continue
         else {
             if (this.restart.isDown && this.badEnd)
                 this.scene.restart(this);
@@ -214,6 +220,7 @@ class LevelTwo extends LevelTemplate {
     create() {
         super.create();
 
+        // create enemy related objects
         this.enemyPatrolSpawn = this.map.createFromObjects("Objects", {
             name: "enemyPatrolSpawn",
             key: "tilemap_characters",
@@ -239,6 +246,7 @@ class LevelTwo extends LevelTemplate {
         this.physics.world.enable(this.patrolBlock, Phaser.Physics.Arcade.STATIC_BODY);
         this.patrolBlockGroup = this.add.group(this.patrolBlock);
 
+        // spawn enemies and place them into arrays
         this.enemies = [];
         this.enemies2 = [];
         this.enemies3 = [];
@@ -264,13 +272,8 @@ class LevelTwo extends LevelTemplate {
         for (let enemy of this.enemies) {
             enemy.body.setSize(9, 9);
         }
-
-        for (let barrier of this.barriers)
-            this.physics.add.collider(this.enemies, barrier, (obj1, obj2) => {
-                //this.respawn();
-                obj1.switch();
-            })    
-        
+   
+        // player interaction behavior with enemies
         this.physics.add.collider(my.sprite.player, this.enemies, (obj1, obj2) => {
             if (obj1.body.touching.down && obj2.body.touching.up) {
                 my.sprite.player.bang(obj2, 15);
@@ -285,6 +288,12 @@ class LevelTwo extends LevelTemplate {
             this.respawn();  
         })    
 
+        // enemy direction switching behavior
+        for (let barrier of this.barriers)
+            this.physics.add.collider(this.enemies, barrier, (obj1, obj2) => {
+                obj1.switch();
+            }) 
+
         this.physics.add.collider(this.enemies, this.patrolBlockGroup, (obj1, obj2) => {
             obj1.switch();
         })  
@@ -293,7 +302,7 @@ class LevelTwo extends LevelTemplate {
             obj1.switch();
         })    
 
-
+        // create end goal and associated behavior
         this.physics.add.overlap(my.sprite.player, this.goal, (obj1, obj2) => {
             this.scene.get("textScene").setState("well done");
             my.sprite.player.stop();
@@ -303,6 +312,7 @@ class LevelTwo extends LevelTemplate {
 
     update() {
         super.update();
+        // update enemies
         for (let enemy of this.enemies){
             enemy.update();
         }
@@ -312,8 +322,10 @@ class LevelTwo extends LevelTemplate {
         for (let enemy3 of this.enemies3){
             enemy3.update();
         }
+        // player update
         if (!this.badEnd && !this.goodEnd)
             my.sprite.player.update();
+        // game restart or return or menu
         else {
             if (this.restart.isDown && this.badEnd)
                 this.scene.restart(this);
