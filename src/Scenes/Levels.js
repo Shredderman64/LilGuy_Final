@@ -34,6 +34,7 @@ class LevelTemplate extends Phaser.Scene {
 
         this.hazardLayer = this.map.createLayer("Hazards", this.tileset);
         this.hazardLayer.forEachTile((hazard) => {
+            // (adjust hitbox on spikes)
             if (hazard.index == 69)
                 hazard.setSize(10, 5);
         });
@@ -69,6 +70,7 @@ class LevelTemplate extends Phaser.Scene {
             name: "goal"
         })
 
+        // enable physics on objects
         this.physics.world.enable(this.coins, Phaser.Physics.Arcade.STATIC_BODY);
         this.coinGroup = this.add.group(this.coins);
 
@@ -88,7 +90,7 @@ class LevelTemplate extends Phaser.Scene {
         // animate tiles
         this.animatedTiles.init(this.map);
 
-        // enable physics
+        // enable physics on player
         my.sprite.player = new Player(this, this.spawnPointX, this.spawnPointY, "tilemap_characters", 0);
         my.sprite.player.setFlip(true, false);
         my.sprite.player.setCollideWorldBounds(true);
