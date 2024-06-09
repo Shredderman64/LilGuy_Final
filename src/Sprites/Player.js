@@ -37,6 +37,16 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             stopAfter: 1
         })
 
+        my.vfx.bang = scene.add.particles(0, 0, "kenny-particles", {
+            alpha: { start: 1, end: 0.1 },
+            frame: ["star_08.png"],
+            lifespan: 250,
+            quantity: 10,
+            scale: { start: 0.03, end: 0.05 },
+            speed: 100,
+            stopAfter: 10
+        })
+
         // player variables
         this.ACCELERATION = 2560;
         this.DRAG = 2560;
@@ -103,5 +113,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         my.vfx.sparkle.particleX = obj.x;
         my.vfx.sparkle.particleY = obj.y;
         my.vfx.sparkle.start();
+    }
+
+    bang(obj, offset = 0) {
+        my.vfx.bang.particleX = obj.x;
+        my.vfx.bang.particleY = obj.y + offset;
+        my.vfx.bang.start();
     }
 }
