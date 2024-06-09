@@ -268,15 +268,8 @@ class LevelTwo extends LevelTemplate {
         for (let barrier of this.barriers)
             this.physics.add.collider(this.enemies, barrier, (obj1, obj2) => {
                 //this.respawn();
-                if (obj1.goLeft){
-                    obj1.goLeft = false;
-                    obj1.goRight = true;
-                }
-                else {
-                    obj1.goLeft = true;
-                    obj1.goRight = false;
-                }
-                })    
+                obj1.switch();
+            })    
         
         this.physics.add.collider(my.sprite.player, this.enemies, (obj1, obj2) => {
             if (obj1.body.touching.down && obj2.body.touching.up) {
@@ -286,33 +279,19 @@ class LevelTwo extends LevelTemplate {
             } else {
                 this.respawn();
             }    
-            })
+        })
 
         this.physics.add.overlap(my.sprite.player, this.enemies3, (obj1, obj2) => {
             this.respawn();  
-            })    
+        })    
 
         this.physics.add.collider(this.enemies, this.patrolBlockGroup, (obj1, obj2) => {
-            if (obj1.goLeft){
-                obj1.goLeft = false;
-                obj1.goRight = true;
-            }
-            else {
-                obj1.goLeft = true;
-                obj1.goRight = false;
-            }
-            })  
+            obj1.switch();
+        })  
             
         this.physics.add.collider(this.enemies3, this.patrolBlockGroup, (obj1, obj2) => {
-            if (obj1.goLeft){
-                obj1.goLeft = false;
-                obj1.goRight = true;
-            }
-            else {
-                obj1.goLeft = true;
-                obj1.goRight = false;
-            }
-            })    
+            obj1.switch();
+        })    
 
 
         this.physics.add.overlap(my.sprite.player, this.goal, (obj1, obj2) => {

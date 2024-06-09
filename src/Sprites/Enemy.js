@@ -30,4 +30,14 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         }
     }
 
+    switch() {
+        if (this.goLeft){
+            this.goLeft = false;
+            this.goRight = true;
+        }
+        else {
+            this.goLeft = true;
+            this.goRight = false;
+        }
+    }
 }
