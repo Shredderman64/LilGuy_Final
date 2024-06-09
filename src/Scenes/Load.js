@@ -33,6 +33,7 @@ class Load extends Phaser.Scene {
         this.load.audio("playerDeath", "audio/explosionCrunch_004.ogg");
 
         this.load.audio("bounce", "audio/phaseJump1.ogg");
+        this.load.audio("squash", "audio/impactPlate_light_000.ogg");
 
         this.load.bitmapFont("retro", "fonts/retro_0.png", "fonts/retro.fnt");
     }
