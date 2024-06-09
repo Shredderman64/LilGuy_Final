@@ -125,6 +125,7 @@ class LevelTemplate extends Phaser.Scene {
             this.spawnPointX = obj2.x;
             this.spawnPointY = obj2.y;
             this.sound.play("spawnReset");
+            my.sprite.player.bang(obj2);
             obj2.destroy();
         })
 
@@ -278,9 +279,11 @@ class LevelTwo extends LevelTemplate {
                 })    
         
         this.physics.add.collider(my.sprite.player, this.enemies, (obj1, obj2) => {
-            if (obj1.body.touching.down && obj2.body.touching.up)
+            if (obj1.body.touching.down && obj2.body.touching.up) {
+                my.sprite.player.bang(obj2, 15);
+                this.sound.play("squash");
                 obj2.destroy();
-            else {
+            } else {
                 this.respawn();
             }    
             })
