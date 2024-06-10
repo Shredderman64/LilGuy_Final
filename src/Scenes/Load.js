@@ -39,6 +39,7 @@ class Load extends Phaser.Scene {
 
         this.load.audio("bounce", "audio/phaseJump1.ogg");
         this.load.audio("squash", "audio/impactPlate_light_000.ogg");
+        this.load.audio("pew", "audio/laserSmall_000.ogg");
 
         // preload font
         this.load.bitmapFont("retro", "fonts/retro_0.png", "fonts/retro.fnt");

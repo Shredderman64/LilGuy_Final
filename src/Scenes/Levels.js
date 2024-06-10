@@ -259,7 +259,7 @@ class LevelTwo extends LevelTemplate {
         this.enemies2 = [];
         this.enemies3 = [];
         this.enemies2proj = [];
-        this.maxProj = 4;
+        this.maxProj = 6;
         
         //Initialize enemy at enemy spawns  
         for (let i = 0; i < this.enemyPatrolSpawn.length; i++){
