@@ -6,14 +6,17 @@ class Load extends Phaser.Scene {
     preload() {
         this.load.setPath("./assets/");
 
+        // preload background
         this.load.image("menu_background", "lilguy_background.png");
         this.load.image("menu_foreground", "ground_tile.png");
 
+        // preload character sheet
         this.load.spritesheet("tilemap_characters", "tilemap-characters_packed.png", {
             frameWidth: 24,
             frameHeight: 24
         })
 
+        // preload tilemap
         this.load.image("tilemap_tiles", "tilemap_packed.png");
         this.load.tilemapTiledJSON("level-one", "level01/level-one.tmj");
         this.load.tilemapTiledJSON("level-two", "level02/level-two.tmj");
@@ -23,8 +26,10 @@ class Load extends Phaser.Scene {
             frameHeight: 18
         });
 
+        // preload particle sheet
         this.load.multiatlas("kenny-particles", "kenny-particles.json");
         
+        // preload audio
         this.load.audio("spawnReset", "audio/powerUp1.ogg");
         this.load.audio("coinPickup", "audio/powerUp2.ogg");
         this.load.audio("keyPickup", "audio/powerUp5.ogg");
@@ -35,10 +40,12 @@ class Load extends Phaser.Scene {
         this.load.audio("bounce", "audio/phaseJump1.ogg");
         this.load.audio("squash", "audio/impactPlate_light_000.ogg");
 
+        // preload font
         this.load.bitmapFont("retro", "fonts/retro_0.png", "fonts/retro.fnt");
     }
 
     create() {
+        // create animations
         this.anims.create({
             key: "walk",
             defaultTextureKey: "tilemap_characters",
@@ -115,6 +122,6 @@ class Load extends Phaser.Scene {
             repeat: -1
         })
 
-        this.scene.start("levelTwoScene");
+        this.scene.start("menuScene");
     }
 }
