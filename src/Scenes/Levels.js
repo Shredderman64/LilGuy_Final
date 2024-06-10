@@ -394,12 +394,13 @@ class LevelTwo extends LevelTemplate {
         }
 
         //Removes projectiles that go off screen
-        this.enemies2proj = this.enemies2proj.filter((bullet) => bullet.y > (bullet.displayHeight*3/2));
+        this.enemies2proj = this.enemies2proj.filter((bullet) => bullet.y < (game.config.height));
 
         //Collider physics between player and projectiles, respawns player
         this.physics.add.collider(my.sprite.player, this.enemies2proj, (obj1, obj2) => {
-            this.respawn();  
-            }) 
+            obj2.y = game.config.height + 100;
+            this.respawn();
+        }) 
 
         //Constantly updates code of EnemySpike class
         for (let enemy3 of this.enemies3){
