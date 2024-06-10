@@ -262,22 +262,19 @@ class LevelTwo extends LevelTemplate {
         this.maxProj = 6;
         
         //Initialize enemy at enemy spawns  
-        for (let i = 0; i < this.enemyPatrolSpawn.length; i++)
-            {
+        for (let i = 0; i < this.enemyPatrolSpawn.length; i++){
                 let enemy = new Enemy(this, this.enemyPatrolSpawn[i].x, this.enemyPatrolSpawn[i].y, "tilemap_characters", 18);
                 this.enemies.push(enemy);
             }
 
         //Initialize enemyLob at enemyLob spawns      
-        for (let i = 0; i < this.enemyLobSpawn.length; i++)
-            {
+        for (let i = 0; i < this.enemyLobSpawn.length; i++){
                 let enemy2 = new EnemyLob(this, this.enemyLobSpawn[i].x, this.enemyLobSpawn[i].y, "tilemap_characters", 11);
                 this.enemies2.push(enemy2);
             } 
         
         //Initialize enemySpike at enemySpike spawns    
-        for (let i = 0; i < this.enemySpikeSpawn.length; i++)
-            {
+        for (let i = 0; i < this.enemySpikeSpawn.length; i++){
                 let enemy3 = new EnemySpike(this, this.enemySpikeSpawn[i].x, this.enemySpikeSpawn[i].y, "tilemap_characters", 8);
                 this.enemies3.push(enemy3);
             } 
@@ -339,53 +336,48 @@ class LevelTwo extends LevelTemplate {
             if (Phaser.Math.Distance.Between(enemy2.x, enemy2.y, my.sprite.player.x, my.sprite.player.y) < 200){
                 enemy2.inDistance = true;
                 //Checks if EnemyLob is ready to shoot, ie. after internal timer completes
-                if (enemy2.shoot)
-                    {
-                        //Checks if Enemies2Proj array isn't more than max amount of projectiles
-                        if (this.enemies2proj.length < this.maxProj){
-                            //Initialize projectile sprite and give it gravity (lob effect)
-                            let enemyProj = this.physics.add.sprite(enemy2.x, enemy2.y, "tilemap_sheet", 8);
-                            enemyProj.body.setAllowGravity(true);
-                            //Set local variable throwRange
-                            let throwRange = 200;
-                            //If player.x and EnemyLob.x are <=50 to lower throwRange to 50
-                            if (Math.abs(enemy2.x - my.sprite.player.x) <= 50)
-                                {
-                                    throwRange = 50;
-                                }
-                            //If player.x and EnemyLob.x are <=100 to lower throwRange to 100
-                                else if (Math.abs(enemy2.x - my.sprite.player.x) <= 100)
-                                {
-                                    throwRange = 100;
-                                }
-                            //Else throwRange is default (200)
-                                else
-                                {
-                                    throwRange = 200;
-                                }    
-                            //Set enemyProj velocity.y to -600 (throwHeight)
-                                enemyProj.setVelocityY(-600);
-                            //If player.x is same as enemyLob.x, throw directly upwards
-                                if (enemy2.x == my.sprite.player.x){
-                                enemyProj.setVelocityX(0);
-                            }
-                            //If player.x is more than enemyLob.x (past it), throw to right
-                            else if (enemy2.x < my.sprite.player.x){
-                                enemyProj.setVelocityX(throwRange);
-                            }
-                            //If player.x is less than enemyLob.x (before it), throw to left
-                            else {
-                                enemyProj.setVelocityX(-throwRange);
-                            }
-                            //Create enemyProj by pushing to array
-                            this.enemies2proj.push(enemyProj);
-                            //Spawn enemyProj 50 units above to give proper arc
-                            enemyProj.y - 50;
-                            this.sound.play("pew");
+                if (enemy2.shoot){
+                    //Checks if Enemies2Proj array isn't more than max amount of projectiles
+                    if (this.enemies2proj.length < this.maxProj){
+                        //Initialize projectile sprite and give it gravity (lob effect)
+                        let enemyProj = this.physics.add.sprite(enemy2.x, enemy2.y, "tilemap_sheet", 8);
+                        enemyProj.body.setAllowGravity(true);
+                        //Set local variable throwRange
+                        let throwRange = 200;
+                        //If player.x and EnemyLob.x are <=50 to lower throwRange to 50
+                        if (Math.abs(enemy2.x - my.sprite.player.x) <= 50){
+                            throwRange = 50;
                         }
-                        //reset enemyLob shoot check
-                        enemy2.shoot = false;
+                        //If player.x and EnemyLob.x are <=100 to lower throwRange to 100
+                        else if (Math.abs(enemy2.x - my.sprite.player.x) <= 100){
+                            throwRange = 100;
+                        }
+                        //Else throwRange is default (200)
+                        else{
+                            throwRange = 200;
+                        }    
+                        //Set enemyProj velocity.y to -600 (throwHeight)
+                            enemyProj.setVelocityY(-600);
+                        //If player.x is same as enemyLob.x, throw directly upwards
+                            if (enemy2.x == my.sprite.player.x){
+                            enemyProj.setVelocityX(0);
+                        }
+                        //If player.x is more than enemyLob.x (past it), throw to right
+                        else if (enemy2.x < my.sprite.player.x){
+                            enemyProj.setVelocityX(throwRange);
+                        }
+                        //If player.x is less than enemyLob.x (before it), throw to left
+                        else {
+                            enemyProj.setVelocityX(-throwRange);
+                        }
+                        //Create enemyProj by pushing to array
+                        this.enemies2proj.push(enemyProj);
+                        //Spawn enemyProj 50 units above to give proper arc
+                        enemyProj.y - 50;
                     }
+                    //reset enemyLob shoot check
+                    enemy2.shoot = false;
+                }
             }
             else {
                 //reset enemyLob distance check
