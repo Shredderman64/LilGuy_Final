@@ -374,6 +374,7 @@ class LevelTwo extends LevelTemplate {
                         this.enemies2proj.push(enemyProj);
                         //Spawn enemyProj 50 units above to give proper arc
                         enemyProj.y - 50;
+                        this.sound.play("pew");
                     }
                     //reset enemyLob shoot check
                     enemy2.shoot = false;
