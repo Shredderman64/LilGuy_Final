@@ -96,8 +96,10 @@ class LevelTemplate extends Phaser.Scene {
         my.sprite.player.body.setMaxVelocityY(500);
 
         this.physics.add.collider(my.sprite.player, this.groundLayer);
+        
         for (let barrier of this.barriers)
             this.physics.add.collider(my.sprite.player, barrier);
+        
         this.physics.add.collider(my.sprite.player, this.hazardLayer, () => {
             this.respawn();
         });
@@ -214,60 +216,71 @@ class LevelTwo extends LevelTemplate {
     create() {
         super.create();
 
+        //Create enemy spawns
         this.enemyPatrolSpawn = this.map.createFromObjects("Objects", {
             name: "enemyPatrolSpawn",
             key: "tilemap_characters",
             frame: 18
         })
 
+        //Create enemyLob spawns
         this.enemyLobSpawn = this.map.createFromObjects("Objects", {
             name: "enemyLobSpawn",
             key: "tilemap_characters",
             frame: 11
         })
 
+        //Create enemySpike spawns
         this.enemySpikeSpawn = this.map.createFromObjects("Objects", {
             name: "enemySpikeSpawn",
             key: "tilemap_characters",
             frame: 8
         })
 
+        //Create patrolBlock objects (invisible)
         this.patrolBlock = this.map.createFromObjects("Objects", {
             name: "patrolBlock"
         })
 
+        //Initialize patrolBlocks to have collisions
         this.physics.world.enable(this.patrolBlock, Phaser.Physics.Arcade.STATIC_BODY);
         this.patrolBlockGroup = this.add.group(this.patrolBlock);
 
+        //Initialize arrays for enemies, projectiles, and projectile limit
         this.enemies = [];
         this.enemies2 = [];
         this.enemies3 = [];
+        this.enemies2proj = [];
+        this.maxProj = 4;
         
+        //Initialize enemy at enemy spawns  
         for (let i = 0; i < this.enemyPatrolSpawn.length; i++)
             {
                 let enemy = new Enemy(this, this.enemyPatrolSpawn[i].x, this.enemyPatrolSpawn[i].y, "tilemap_characters", 18);
                 this.enemies.push(enemy);
             }
 
+        //Initialize enemyLob at enemyLob spawns      
         for (let i = 0; i < this.enemyLobSpawn.length; i++)
             {
                 let enemy2 = new EnemyLob(this, this.enemyLobSpawn[i].x, this.enemyLobSpawn[i].y, "tilemap_characters", 11);
                 this.enemies2.push(enemy2);
             } 
         
+        //Initialize enemySpike at enemySpike spawns    
         for (let i = 0; i < this.enemySpikeSpawn.length; i++)
             {
                 let enemy3 = new EnemySpike(this, this.enemySpikeSpawn[i].x, this.enemySpikeSpawn[i].y, "tilemap_characters", 8);
                 this.enemies3.push(enemy3);
-            }     
+            } 
 
         for (let enemy of this.enemies) {
             enemy.body.setSize(9, 9);
         }
 
+        //Collider properties for enemy with barrier blocks   
         for (let barrier of this.barriers)
             this.physics.add.collider(this.enemies, barrier, (obj1, obj2) => {
-                //this.respawn();
                 if (obj1.goLeft){
                     obj1.goLeft = false;
                     obj1.goRight = true;
@@ -278,6 +291,7 @@ class LevelTwo extends LevelTemplate {
                 }
                 })    
         
+        //Collider properties for player with enemy           
         this.physics.add.collider(my.sprite.player, this.enemies, (obj1, obj2) => {
             if (obj1.body.touching.down && obj2.body.touching.up) {
                 my.sprite.player.bang(obj2, 15);
@@ -286,12 +300,15 @@ class LevelTwo extends LevelTemplate {
             } else {
                 this.respawn();
             }    
-            })
+            })     
 
+        //Collider properties for player with enemySpike        
         this.physics.add.overlap(my.sprite.player, this.enemies3, (obj1, obj2) => {
             this.respawn();  
             })    
 
+
+        //Collider properties for enemy with patrolBlocks    
         this.physics.add.collider(this.enemies, this.patrolBlockGroup, (obj1, obj2) => {
             if (obj1.goLeft){
                 obj1.goLeft = false;
@@ -302,7 +319,8 @@ class LevelTwo extends LevelTemplate {
                 obj1.goRight = false;
             }
             })  
-            
+        
+        //Collider properties for enemySpike with patrolBlocks    
         this.physics.add.collider(this.enemies3, this.patrolBlockGroup, (obj1, obj2) => {
             if (obj1.goLeft){
                 obj1.goLeft = false;
@@ -324,12 +342,80 @@ class LevelTwo extends LevelTemplate {
 
     update() {
         super.update();
+        
+        //Constantly updates code of Enemy class
         for (let enemy of this.enemies){
             enemy.update();
         }
+        //Constantly updates code of Enemy Lob class
         for (let enemy2 of this.enemies2){
             enemy2.update();
+            //Checks if player is within range of EnemyLob
+            if (Phaser.Math.Distance.Between(enemy2.x, enemy2.y, my.sprite.player.x, my.sprite.player.y) < 200){
+                enemy2.inDistance = true;
+                //Checks if EnemyLob is ready to shoot, ie. after internal timer completes
+                if (enemy2.shoot)
+                    {
+                        //Checks if Enemies2Proj array isn't more than max amount of projectiles
+                        if (this.enemies2proj.length < this.maxProj){
+                            //Initialize projectile sprite and give it gravity (lob effect)
+                            let enemyProj = this.physics.add.sprite(enemy2.x, enemy2.y, "tilemap_sheet", 8);
+                            enemyProj.body.setAllowGravity(true);
+                            //Set local variable throwRange
+                            let throwRange = 200;
+                            //If player.x and EnemyLob.x are <=50 to lower throwRange to 50
+                            if (Math.abs(enemy2.x - my.sprite.player.x) <= 50)
+                                {
+                                    throwRange = 50;
+                                }
+                            //If player.x and EnemyLob.x are <=100 to lower throwRange to 100
+                                else if (Math.abs(enemy2.x - my.sprite.player.x) <= 100)
+                                {
+                                    throwRange = 100;
+                                }
+                            //Else throwRange is default (200)
+                                else
+                                {
+                                    throwRange = 200;
+                                }    
+                            //Set enemyProj velocity.y to -600 (throwHeight)
+                                enemyProj.setVelocityY(-600);
+                            //If player.x is same as enemyLob.x, throw directly upwards
+                                if (enemy2.x == my.sprite.player.x){
+                                enemyProj.setVelocityX(0);
+                            }
+                            //If player.x is more than enemyLob.x (past it), throw to right
+                            else if (enemy2.x < my.sprite.player.x){
+                                enemyProj.setVelocityX(throwRange);
+                            }
+                            //If player.x is less than enemyLob.x (before it), throw to left
+                            else {
+                                enemyProj.setVelocityX(-throwRange);
+                            }
+                            //Create enemyProj by pushing to array
+                            this.enemies2proj.push(enemyProj);
+                            //Spawn enemyProj 50 units above to give proper arc
+                            enemyProj.y - 50;
+                        }
+                        //reset enemyLob shoot check
+                        enemy2.shoot = false;
+                    }
+            }
+            else {
+                //reset enemyLob distance check
+                enemy2.inDistance = false;
+            }
         }
+
+        //Removes projectiles that go off screen
+        this.enemies2proj = this.enemies2proj.filter((bullet) => bullet.y > (bullet.displayHeight*3/2));
+
+        //Collider physics between player and projectiles, respawns player
+        this.physics.add.collider(my.sprite.player, this.enemies2proj, (obj1, obj2) => {
+            this.respawn();  
+            }) 
+
+        //Constantly updates code of EnemySpike class
         for (let enemy3 of this.enemies3){
             enemy3.update();
         }

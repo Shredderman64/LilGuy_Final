@@ -7,7 +7,10 @@ class EnemyLob extends Phaser.Physics.Arcade.Sprite {
         this.body.setAllowGravity(false);
 
         this.timer = 0;
+        this.inDistance = false;
         this.shoot = false;
+        this.aimX = 0;
+        this.aimY = 0;
 
         //this.proj = this.sprite.
 
@@ -15,13 +18,17 @@ class EnemyLob extends Phaser.Physics.Arcade.Sprite {
     }
 
     update() {
-        this.timer++;
-        //this.anims.play("enemyProjIdle", true);
-        if (this.timer == 600 && !this.shoot) {
+        if (this.inDistance)
+        {
             this.anims.play("enemyProjShoot", true);
-            this.shoot = true;
-            this.timer = 0;
-            //spawn projectile idk
+            this.timer++;
+            if (this.timer == 300 && !this.shoot) {
+                this.shoot = true;
+                this.timer = 0;
+            }
+        }
+        else{
+            this.anims.play("enemyProjIdle", true);
         }
     }
 
