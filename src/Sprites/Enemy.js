@@ -8,8 +8,8 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
 
         this.VELOCITY = 50;
 
-        this.goLeft = true;
-        this.goRight = false;
+        this.goLeft = false;
+        this.goRight = true;
 
         return this;
     }
