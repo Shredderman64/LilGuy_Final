@@ -22,7 +22,7 @@ class EnemyLob extends Phaser.Physics.Arcade.Sprite {
         {
             this.anims.play("enemyProjShoot", true);
             this.timer++;
-            if (this.timer == 100 && !this.shoot) {
+            if (this.timer == 150 && !this.shoot) {
                 this.shoot = true;
                 this.timer = 0;
             }
