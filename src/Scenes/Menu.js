@@ -24,7 +24,7 @@ class Menu extends Phaser.Scene {
         );
         this.options.push(
             this.add.bitmapText(game.config.width / 2, (game.config.height / 2) + 90, "retro",
-            "Press C to view credits", 25).setOrigin(0.5).setBlendMode(Phaser.BlendModes.ADD)
+            "Press C to view credits and controls", 25).setOrigin(0.5).setBlendMode(Phaser.BlendModes.ADD)
         );
 
         // credits
@@ -52,6 +52,30 @@ class Menu extends Phaser.Scene {
         this.credits.push(
             this.add.bitmapText(game.config.width / 2, (game.config.height / 2) + 90, "retro",
             "https://www.dafont.com/retro-gaming.font", 25).setOrigin(0.5).setBlendMode(Phaser.BlendModes.ADD)
+        )
+        this.credits.push(
+            this.add.bitmapText(game.config.width / 2, (game.config.height / 2) + 150, "retro",
+            "Controls", 40).setOrigin(0.5).setBlendMode(Phaser.BlendModes.ADD)
+        )
+        this.credits.push(
+            this.add.bitmapText(game.config.width / 2, (game.config.height / 2) + 180, "retro",
+            "Left Arrow - Move Left", 25).setOrigin(0.5).setBlendMode(Phaser.BlendModes.ADD)
+        )
+        this.credits.push(
+            this.add.bitmapText(game.config.width / 2, (game.config.height / 2) + 210, "retro",
+            "Right Arrow - Move Right", 25).setOrigin(0.5).setBlendMode(Phaser.BlendModes.ADD)
+        )
+        this.credits.push(
+            this.add.bitmapText(game.config.width / 2, (game.config.height / 2) + 240, "retro",
+            "Up Arrow - Jump", 25).setOrigin(0.5).setBlendMode(Phaser.BlendModes.ADD)
+        )
+        this.credits.push(
+            this.add.bitmapText(game.config.width / 2, (game.config.height / 2) + 270, "retro",
+            "Up Arrow (while midair) - Double Jump", 25).setOrigin(0.5).setBlendMode(Phaser.BlendModes.ADD)
+        )
+        this.credits.push(
+            this.add.bitmapText(game.config.width / 2, (game.config.height / 2) + 330, "retro",
+            "Press C to return to Main Menu", 25).setOrigin(0.5).setBlendMode(Phaser.BlendModes.ADD)
         )
 
         // hide credits
